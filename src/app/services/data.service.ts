@@ -13,7 +13,7 @@ export interface Message {
   providedIn: 'root'
 })
 export class DataService {
-private api: string = "https://jsonplaceholder.typicode.com/";
+private api: string = "https://api.hgbrasil.com/finance?format=json-cors&key=4177407c";
 
   constructor(private http: HttpClient) { }
   
@@ -23,7 +23,7 @@ private api: string = "https://jsonplaceholder.typicode.com/";
   }
 
   readData(){
-    return this.http.get(`${this.api}posts/1`);
+    return this.http.get(this.api);
   }
   updateData(){
 
