@@ -7,22 +7,6 @@ import { DataService, Message } from '../services/data.service';
   templateUrl: './view-message.page.html',
   styleUrls: ['./view-message.page.scss'],
 })
-export class ViewMessagePage implements OnInit {
-  public message: Message;
+export class ViewMessagePage  {
 
-  constructor(
-    private data: DataService,
-    private activatedRoute: ActivatedRoute
-  ) { }
-
-  ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.message = this.data.getMessageById(parseInt(id, 10));
-  }
-
-  getBackButtonText() {
-    const win = window as any;
-    const mode = win && win.Ionic && win.Ionic.mode;
-    return mode === 'ios' ? 'Inbox' : '';
-  }
 }

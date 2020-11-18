@@ -7,16 +7,17 @@ import { DataService, Message } from '../services/data.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor(private data: DataService) {}
-
-  refresh(ev) {
-    setTimeout(() => {
-      ev.detail.complete();
-    }, 3000);
+  constructor(private data: DataService) {
+  //  this.createData();
+    this.readData();
+  //  this.updateData();
+  //  this.deleteData();
   }
 
-  getMessages(): Message[] {
-    return this.data.getMessages();
+  readData(){
+    this.data.readData().subscribe(data =>{
+      console.log(data)
+    });
   }
 
 }
