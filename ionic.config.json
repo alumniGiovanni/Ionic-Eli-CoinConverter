@@ -1,0 +1,7 @@
+{
+  "name": "CoinConverter",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
