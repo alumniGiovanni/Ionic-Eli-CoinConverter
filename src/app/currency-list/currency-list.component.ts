@@ -1,16 +1,40 @@
+import { Currencies } from '../model/currencies';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
+
+import { ConversionRate } from './../model/conversion-rate.model';
 
 @Component({
-  selector: 'simple-currency-list-item',
-  templateUrl: './currency-list-item.component.html',
-  styleUrls: ['./currency-list-item.component.css']
+  selector: 'simple-currency-list',
+  templateUrl: './currency-list.component.html',
+  styleUrls: ['./currency-list.component.scss']
 })
-export class CurrencyListItemComponent {
+export class CurrencyListComponent implements OnChanges {
 
-  @Input() baseCurrencyCode: string;
-  @Input() amount: number;
-  @Input() otherCurrencyCode: string;
-  @Input() otherCurrencyConversionRate: number;
+  @Input() rates: ConversionRate;
+  @Input() responseErrorMessage: string;
+  @Input() currencies: Currencies;
+  wCurrencies: Currencies;
 
+  ngOnChanges(changes: SimpleChanges) {
+    const rates = changes.rates;
+    const keys = Object.keys(this.currencies);
+    if (
+      rates && rates.currentValue && (!rates.previousValue ||
+      (rates.previousValue && rates.previousValue.baseCurrencyCode !== rates.currentValue.baseCurrencyCode))
+    ) {
+      this.wCurrencies = keys
+        .filter(key => key !== this.rates.baseCurrencyCode)
+        .reduce((prevValue, currentValue) => {
+          prevValue[currentValue] = {
+            ...this.currencies[currentValue],
+            rate: this.rates.rates[currentValue]
+          };
+          return prevValue;
+        }, {});
+    }
+  }
+
+  customListOrder(obj1, obj2): number {
+    return obj2.value.weight - obj1.value.weight;
+  }
 }

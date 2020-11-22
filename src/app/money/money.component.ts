@@ -1,4 +1,4 @@
-import { Currencies } from './../model/currencies';
+import { Currencies } from '../model/currencies';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Subject, BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 import { filter, switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { ConversionRate } from './../model/conversion-rate.model';
 @Component({
   selector: 'simple-money',
   templateUrl: './money.component.html',
-  styleUrls: ['./money.component.css']
+  styleUrls: ['./money.component.scss']
 })
 export class MoneyComponent implements OnInit, OnDestroy {
 

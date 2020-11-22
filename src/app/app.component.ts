@@ -1,27 +1,46 @@
-import { Component } from '@angular/core';
+import { Currencies } from './model/currencies';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { ConversionRate } from './model/conversion-rate.model';
+import { ConversionRatesService } from './services/conversion-rates.service';
+import { CurrencyListService } from './services/currency-list.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  selector: 'simple-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+
+  private subscription: Subscription;
+  newRates: ConversionRate;
+  isLoading = false;
+  responseErrorMessage: string;
+  baseCurrencies: Currencies;
+  currencies: Currencies;
+
   constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-  ) {
-    this.initializeApp();
+    private conversionRatesService: ConversionRatesService,
+    private currencyListService: CurrencyListService
+  ) { }
+
+  ngOnInit() {
+    this.currencies = this.currencyListService.getCurrencies();
+    this.baseCurrencies = this.currencyListService.generateBaseCurrencies(['EUR', 'USD', 'GBP']);
+
+    this.subscription = this.conversionRatesService
+    .getLoadingStatus()
+    .subscribe(isLoading => {
+      this.isLoading = isLoading;
+    });
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  onExchangeRateUpdate(newRates: ConversionRate) {
+    this.newRates = newRates;
   }
 }

@@ -8,9 +8,9 @@
       id="money"
       name="money"
       [attr.aria-label]="
-        'Valor em ' + 
+        'Amount in ' + 
         baseCurrencies[currentCurrencyCode].currency + 
-        'para ser convertido'"
+        'to be converted'"
       ngModel
       (ngModelChange)="onInput($event)"
       pattern="^\d{1,3}(,?\d{3})*(\.\d{2})?$"
@@ -22,7 +22,7 @@
   </div>
   <div class="error-message" role="alert">
     <span *ngIf="money.errors && (money.dirty || money.touched)">
-      Numero invalido
+      Please enter just a valid number
     </span>
   </div>
   <simple-currency-selector

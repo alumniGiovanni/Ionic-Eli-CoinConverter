@@ -4,7 +4,7 @@ import { CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'simple-currency-list-item',
   templateUrl: './currency-list-item.component.html',
-  styleUrls: ['./currency-list-item.component.css']
+  styleUrls: ['./currency-list-item.component.scss']
 })
 export class CurrencyListItemComponent {
 

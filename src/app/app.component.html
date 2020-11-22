@@ -1,3 +1,35 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<div class="wrapper">
+  <h1>
+    <a href="/" title="Currency Converter Home">
+      <img
+        src=""
+        alt=""
+        width="36"
+        height="36">
+      <span>CURRENCY<br>CONVERTER</span>
+    </a>
+  </h1>
+  <main>
+    <simple-money
+      [baseCurrencies]="baseCurrencies"
+      [otherCurrencies]="currencies"
+      (updateExchangeRates)="onExchangeRateUpdate($event)"
+      (errorMessage)="responseErrorMessage=$event">
+    </simple-money>
+    <div class="output-container">
+      <simple-currency-list
+        *ngIf="!isLoading"
+        [rates]="newRates"
+        [currencies]="currencies"
+        [responseErrorMessage]="responseErrorMessage">
+      </simple-currency-list>
+    </div>
+  </main>
+  <footer>
+    <p *ngIf="newRates">
+      Last Update: {{ newRates.date | date }}
+    </p>
+  </footer>
+</div>
+
+

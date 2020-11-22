@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 @Component({
   selector: 'simple-currency-selector',
   templateUrl: './currency-selector.component.html',
-  styleUrls: ['./currency-selector.component.css']
+  styleUrls: ['./currency-selector.component.scss']
 })
 export class CurrencySelectorComponent implements OnInit {
 

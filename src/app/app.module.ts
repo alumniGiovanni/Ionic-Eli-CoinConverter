@@ -10,10 +10,18 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { CurrencyListComponent } from './currency-list/currency-list.component';
+import { CurrencyListItemComponent } from './currency-list/currency-list-item/currency-list-item.component';
+import { CurrencySelectorComponent } from './currency-selector/currency-selector.component';
+import { MoneyComponent } from './money/money.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,
+    MoneyComponent,
+    CurrencySelectorComponent,
+    CurrencyListComponent,
+    CurrencyListItemComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
